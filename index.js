@@ -88,6 +88,18 @@ app.get("/keywords.json", function(req, res, next) {
   res.json(keywords);
 });
 
+// Get total count for the last 24 hours
+app.get("/stats/24hours_total.json", function(req,res,next){
+  var output = {};
+  for (var k in keywordStats) {
+    output[k] = keywordStats[k].past24.total;
+  }
+
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.json(output);
+});
+
 // Get stats for past 24 hours
 app.get("/stats/:keyword/24hours.json", function(req, res, next) {
   var keyword = decodeURIComponent(req.params.keyword);
@@ -104,7 +116,7 @@ app.get("/stats/:keyword/24hours.json", function(req, res, next) {
 
   // Reduce total to account for removed stat
   var newTotal = keywordStats[keyword].past24.total - removedStat.value;
-
+  console.log("total for " + keyword + " is " + keywordStats[keyword].past24.total);
   var output = {
     total: newTotal,
     data: statsCopy
