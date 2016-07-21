@@ -5,6 +5,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var errorHandler = require("errorhandler");
 
+var statsTime = new Date();
 var config;
 try {
   config = require("./config");
@@ -34,14 +35,15 @@ var log = function() {
 
 var keywords = config.keywords;
 
+
 // Using a constructor for memory profiling
-var KeywordStats = function() {
+var KeywordStats = function(count) {
   var self = this;
   self.past24 = {
     total: 0,
     // Per-minute, with anything after 24-hours removed
     data: [{
-      value: 0,
+      value: count,
       time: statsTime.getTime()
     }]
   };
@@ -78,6 +80,27 @@ app.use(bodyParser.json());
 // Ping
 app.get("/ping", function(req, res) {
   res.status(200).end();
+});
+
+_.each(keywords, function(keyword) {
+    if (!keywordStats[keyword]) {
+          keywordStats[keyword] = new KeywordStats(0);
+            }
+});
+
+
+// add keywords to tracking list
+app.post("/trackkeywords", function(req, res, next) {
+  keywords = req.body["keywords"];
+  count = req.body["count"];
+  _.each(keywords, function(keyword, i) {
+    if (!keywordStats[keyword]) {
+      keywordStats[keyword] = new KeywordStats(count[i]);
+    }
+  });
+
+  res.status(200).end();
+  return;
 });
 
 // Endpoint for accessing list of active keywords
@@ -192,12 +215,12 @@ app.listen(port, function() {
 // STATS UPDATES
 // --------------------------------------------------------------------
 
-var statsTime = new Date();
+
 
 // Populate initial statistics for each keyword
 _.each(keywords, function(keyword) {
   if (!keywordStats[keyword]) {
-    keywordStats[keyword] = new KeywordStats();
+    keywordStats[keyword] = new KeywordStats(0);
   }
 });
 
