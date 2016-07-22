@@ -73,7 +73,9 @@ var app = express();
 
 // Parse application/json and application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit:'50mb',
+  parameterLimit: 10000
 }));
 app.use(bodyParser.json());
 
