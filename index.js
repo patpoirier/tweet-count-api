@@ -91,6 +91,7 @@ _.each(keywords, function(keyword) {
 
 // add keywords to tracking list
 app.post("/trackkeywords", function(req, res, next) {
+  console.log("POST : /trackkeywords started for "+ req.body["keywords"])
   keywords = req.body["keywords"];
   count = req.body["count"];
   _.each(keywords, function(keyword, i) {
@@ -113,6 +114,7 @@ app.get("/keywords.json", function(req, res, next) {
 
 // Get total count for the last 24 hours
 app.get("/stats/24hours_total.json", function(req,res,next){
+  console.log("GET : /stats/24hours_total.json started ")
   var output = {};
   for (var k in keywordStats) {
     output[k] = keywordStats[k].past24.total;
