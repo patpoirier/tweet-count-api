@@ -99,7 +99,7 @@ app.post("/trackkeywords", function(req, res, next) {
     if (!keywordStats[keywords[i]]) {
       keywordStats[keywords[i]] = new KeywordStats(count[i]);
     }
-  });
+  };
   console.log("POST : /trackkeywords status 200" )
   res.status(200).end();
   return;
