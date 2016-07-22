@@ -91,15 +91,16 @@ _.each(keywords, function(keyword) {
 
 // add keywords to tracking list
 app.post("/trackkeywords", function(req, res, next) {
-  console.log("POST : /trackkeywords started for "+ req.body["keywords"])
+  console.log("POST : /trackkeywords started for "+ req.body["keywords"]+" and count "+req.body["count"] )
   keywords = req.body["keywords"];
   count = req.body["count"];
-  _.each(keywords, function(keyword, i) {
-    if (!keywordStats[keyword]) {
-      keywordStats[keyword] = new KeywordStats(count[i]);
+  ///_.each(keywords, function(keyword, i) {
+  for (var i = 0; i < keywords.length; i++) { 
+    if (!keywordStats[keywords[i]]) {
+      keywordStats[keywords[i]] = new KeywordStats(count[i]);
     }
   });
-
+  console.log("POST : /trackkeywords status 200" )
   res.status(200).end();
   return;
 });
