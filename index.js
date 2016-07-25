@@ -158,7 +158,7 @@ app.get("/stats/:keyword/24hours.json", function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.set({
-  'Content-Type': 'application/x-www-urlencoded'
+  'Content-Type': 'application/json'
   })
   res.json(output);
 
@@ -202,7 +202,7 @@ app.get("/stats/:keyword/24hours-geckoboard.json", function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.set({
-  'Content-Type': 'application/x-www-urlencoded'
+  'Content-Type': 'application/json'
   })
   res.json(output);
 

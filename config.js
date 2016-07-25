@@ -6,5 +6,5 @@ module.exports = {
   twitter_consumer_secret: "ok5610mhnaueDXSIVCBOuVx16n62MUp8Z1ssGxbCKJBT4UCNOg",
   twitter_access_token_key: "1137419018-eLPjPBNXjCBxB3u3ao5S49gEYPn5BlI6Zpu4XPZ",
   twitter_access_token_secret: "rhEXrWzFAkwRyHzkAE6zFUIdmOZz3yv5dfVDdfq8h5bdh",
-  keywords: ["$Dummy$"]
+  keywords: ["$Dummy$", "Barack Obama"]
 }
