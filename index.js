@@ -98,8 +98,8 @@ app.post("/trackkeywords", function(req, res, next) {
   count = req.body["count"];
   ///_.each(keywords, function(keyword, i) {
   for (var i = 0; i < keywords.length; i++) { 
-    if (!keywordStats[keywords]) {
-      keywordStats[keywords] = new KeywordStats(count[i]);
+    if (!keywordStats[keywords[i]]) {
+      keywordStats[keywords[i]] = new KeywordStats(count[i]);
     }
   };
   console.log("POST : /trackkeywords status 200" )
